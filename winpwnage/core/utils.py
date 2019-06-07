@@ -163,6 +163,15 @@ class registry():
 		except Exception as e:
 			return False
 
+	def query_value(self, hkey, path, name):
+		try:
+			key = _winreg.OpenKey(self.hkeys[hkey], path, 0, _winreg.KEY_READ)
+			value = _winreg.QueryValueEx(key, name)
+			_winreg.CloseKey(key)
+		except WindowsError:
+			return None
+		else:
+			return value[0]
 
 class information():
 	"""
