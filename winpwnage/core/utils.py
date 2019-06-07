@@ -145,6 +145,7 @@ class registry():
 				key = _winreg.OpenKey(self.hkeys[hkey], path, 0, _winreg.KEY_ALL_ACCESS)
 			else:
 				key = _winreg.CreateKey(self.hkeys[hkey], os.path.join(path))
+
 			_winreg.SetValueEx(key, name, 0, _winreg.REG_SZ, value)
 			_winreg.CloseKey(key)
 			return True
@@ -157,8 +158,9 @@ class registry():
 				_winreg.DeleteKey(self.hkeys[hkey], path)
 			else:
 				key = _winreg.OpenKey(self.hkeys[hkey], path, 0, _winreg.KEY_ALL_ACCESS)
-				_winreg.DeleteValue(key, name)
-				_winreg.CloseKey(key)
+
+			_winreg.DeleteValue(key, name)
+			_winreg.CloseKey(key)
 			return True
 		except Exception as e:
 			return False
